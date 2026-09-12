@@ -14,7 +14,7 @@ class palindrome_num
     static void is_palindrome(int n)
     {
         int temp=0,num,rev_num=0;
-        num = n;
+        num = n; 
         while(n>0)
         {
             temp = n % 10;

@@ -19,12 +19,12 @@
 // Registration Successful
 
 // or all validation errors.
-
-import java.util. Scanner;
+package java_sandbox.User_Registration_Validator;
+import java.util.Scanner;
 
 class user_registration 
 {   
-    public static void main(String[] argd)
+    public static void main(String[] args)
     {
         Scanner scanner = new Scanner(System.in);
 
@@ -51,6 +51,8 @@ class user_registration
         System.out.println("Age:");
         int age = scanner.nextInt();
         age(age, scanner);
+
+        
     }
 
     static void username(String uname, Scanner scanner)
@@ -172,5 +174,6 @@ class user_registration
         }
  
     }
+
 
 }
