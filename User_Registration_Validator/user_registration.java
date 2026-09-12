@@ -54,15 +54,22 @@ class user_registration
     }
 
     static void username(String uname)
-    {
-        if ((uname.matches(".*[^a-zA-Z0-9].*")) && uname.length() >= 5 && uname.length() <=15 ) 
+    {   
+        boolean flag = true;
+        while (flag) 
+        {
+            if ((uname.matches(".*[^a-zA-Z0-9].*")) || uname.length() >= 5 || uname.length() <=15 ) 
             {
                System.out.println("ERROR : Username must be 5–15 characters and Username can contain only letters & numbers."); 
+             
             }
-        else
-            {
-                System.out.println("Username successfully generated. !!!");
-            }   
+            else
+                flag = false;
+        }
+
+        System.out.println("Username successfully generated. !!!");
+
+        
 
     }
     static void email(String email)
