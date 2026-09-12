@@ -30,90 +30,147 @@ class user_registration
 
         System.out.println("Username:");
         String uname = scanner.nextLine();
-        username(uname);
+        username(uname, scanner);
         System.out.println(); 
 
         System.out.println("Email:");
         String email = scanner.nextLine();
-        email(email);
+        email(email, scanner);
         System.out.println(); 
 
         System.out.println("Password:");
         String password = scanner.nextLine();
-        password(password);
+        password(password, scanner);
         System.out.println(); 
 
         System.out.println("Phone no:");
-        long phoneno = scanner.nextLong();
-        phone_no(phoneno);
+        String phoneno = scanner.nextLine();
+        phone_no(phoneno, scanner);
         System.out.println(); 
 
         System.out.println("Age:");
         int age = scanner.nextInt();
-        age(age);
+        age(age, scanner);
     }
 
-    static void username(String uname)
+    static void username(String uname, Scanner scanner)
     {   
-        boolean flag = true;
-        while (flag) 
+        while (true) 
         {
-            if ((uname.matches(".*[^a-zA-Z0-9].*")) || uname.length() >= 5 || uname.length() <=15 ) 
+            if ((uname.matches("[a-zA-Z0-9]+")) && uname.length() >= 5 && uname.length() <= 15 ) 
             {
-               System.out.println("ERROR : Username must be 5–15 characters and Username can contain only letters & numbers."); 
-             
+               System.out.println("Username successfully generated. !!!");
+               break;
             }
             else
-                flag = false;
+            {
+                System.out.println("ERROR : Username must be 5–15 characters and Username can contain only letters & numbers.");
+                System.out.println();
+                System.out.print("Enter username again: ");
+                uname = scanner.nextLine();
+            }
         }
-
-        System.out.println("Username successfully generated. !!!");
 
         
+    }
+    static void email(String email, Scanner scanner)
+    {   
+        while (true) 
+        {
+            if (email.indexOf('@') != -1 && email.indexOf('.') != -1)
+            {
+                System.out.println("Email successfully generated. !!!");
+                break;
+            }
+            else{
+                System.out.println("Email does not contain @ or Domain.");
+                System.out.println();
+                System.out.println("Enter Email again:");
+                email = scanner.nextLine();
+            }            
+        }
 
     }
-    static void email(String email)
-    {
-        if (email.indexOf('@') == -1 && email.indexOf('.') == -1)
-        {
-            System.out.println("Email successfully generated. !!!");
+    static void password(String pword, Scanner scanner)
+    {   
+        while (true) 
+        {   
+            boolean hasUpper = false;
+            boolean hasLower = false;
+            boolean hasDigit = false;
+            boolean hasSpecial = false;
+
+            for (int i = 0; i < pword.length(); i++) 
+            {   
+                char ch = pword.charAt(i);
+                if (Character.isUpperCase(ch)) 
+                {
+                    hasUpper = true;   
+                }   
+                else if (Character.isLowerCase(ch)) 
+                {
+                    hasLower = true;    
+                } 
+                else if (Character.isDigit(ch))
+                {
+                    hasDigit = true;
+                }    
+                else
+                {
+                    hasSpecial = true;
+                }
+            }
+            if (pword.length() >= 8 && pword.length() <= 15 && hasDigit && hasLower && hasUpper && hasSpecial)
+            {
+                System.out.println("Valid Password successfully generated. !!!.");
+                break;    
+            }
+            else
+            {
+                System.out.println("Password is not generated. !!!.");
+                System.out.println();
+                System.out.println("Enter the Password again:");
+                pword = scanner.nextLine();
+            }       
         }
-        else{
-            System.out.println("Email does not contain @ or Domain.");
+ 
+    }
+    static void phone_no(String phone_no, Scanner scanner)
+    {   
+        while (true) 
+        {
+            if (phone_no.matches("[0-9]{10}")) 
+            {
+                System.out.println("Valid."); 
+                break; 
+            }
+            else
+            {
+                System.out.println("Invalid.");  
+                System.out.println();
+                System.out.println("Enter the Phone Number again:");
+                phone_no = scanner.nextLine();
+            }
         }
     }
-    static void password(String pword)
-    {
-        if (pword.length()>=8 && pword.matches(".*[^a-zA-Z0-9].*")) 
+    static void age(int age_no, Scanner scanner)
+    {   
+        while (true) 
         {
-            System.out.println("Valid Password successfully generated. !!!.");
+            if (age_no >=18 && age_no <=70) 
+            {
+                System.out.println("Valid Age.");  
+                break;
+            }
+            else
+            {
+                System.out.println("Invalid.");  
+                System.out.println();
+                System.out.println("Enter the Age again:");
+                age_no = scanner.nextInt();
+            }    
         }
-        else
-        {
-            System.out.println("Password is not generated. !!!.");
-        }    
-    }
-    static void phone_no(long phone_no)
-    {
-        if (phone_no <11 && phone_no >9) 
-        {
-            System.out.println("Valid.");  
-        }
-        else
-        {
-            System.out.println("Invalid.");  
-        }
-    }
-    static void age(int age_no)
-    {
-        if (age_no >=18 && age_no <=70) 
-        {
-            System.out.println("Valid Age.");  
-        }
-        else
-        {
-            System.out.println("Invalid Age.");  
-        }
+ 
     }
 
 }
