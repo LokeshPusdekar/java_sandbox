@@ -23,7 +23,6 @@
 
 
 
-package java_sandbox.url_analyzer;
 
 import java.util.Scanner;
 
@@ -35,7 +34,7 @@ class url
 
         System.out.println("Enter a URL:");
         String url = scan.nextLine();
-        url(url ); 
+        url(url); 
 
     }
 
@@ -43,17 +42,49 @@ class url
     {
         // https://www.example.com:8080/products/phones?id=123&brand=apple#reviews
 
-        String https = url.substring(0, 4);
-        String www = url.substring(8, 10);
+        //HTTPS
+        if (url.contains("https")) 
+        {
+            System.out.println("Protocol        : https");
+        }
+        else
+            System.out.println("Not Found.");
+        
 
-        System.out.println("Protocol   : "+https);
-        System.out.println("Sub Domain : "+www);
-        System.out.println("Port       : "+https);
-        System.out.println("Path       : "+https);
-        System.out.println("Querry     : "+https);
-        System.out.println("Parameter  : "+https);
-        System.out.println("Fragment   : "+https);
+        // WWW
+        if ( url.contains("www")) 
+        {
+            System.out.println("Sub Domain      : www");
+        }
+        else
+            System.out.println("Not Found.");
 
+
+        //DOMAIN NAME
+        String[] temp = url.split("://");          // https  www.example.com:8080/products/phones?id=123&brand=apple#reviews
+        String[] temp2 = temp[1].split(":");     // www.example.com   8080/products/phones?id=123&brand=apple#reviews
+        String domain = temp2[0].substring(4);
+        System.out.println("Domain          : "+domain);
+        
+        //PORT 
+        String[] temp3 = temp2[1].split("/");   // 8080   products   phones?id=123&brand=apple#reviews
+        System.out.println("Port            : "+temp3[0]);
+        int port_len = temp3[0].length();
+        // System.out.println("Port length      : "+port_len);
+
+        //PATH
+        String[] temp4 = temp2[1].split("[? #]");       // 8080/products/phones      id=123&brand=apple     reviews
+        System.out.println("Path            : "+temp4[0].substring(port_len+1));
+
+        //Querry
+        String[] temp5 = temp4[1].split("&");
+        for (int i = 0; i < temp5.length; i++) 
+        {
+            System.out.println("Querry_param_" + (i+1)+ "  : "+ temp5[i]);
+        }
+
+        //Fragments
+        System.out.println("Fragment        : "+temp4[2]);
     }
     
 }
